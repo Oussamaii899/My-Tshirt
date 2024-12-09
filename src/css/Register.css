@@ -60,6 +60,7 @@
     padding: 0.3em;
     border-radius: 20px;
     transition: all 0.4s;
+    font-size: 16px;
 
 }
 #lolo button:hover{
@@ -68,19 +69,19 @@
     transition: all 0.4s;
 }
 #lmp{
-    margin-top: 2em;
+    margin-top: 4em;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 #lmp1{
-    margin-top: 4.6em;
+    margin-top: 5.6em;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 #lmp hr{
-    width: 70px !important;
+    width: 120px !important;
     background-color: black;
     height: 1px;
     margin: 0;
@@ -88,7 +89,7 @@
     margin-right: 10px;
 }
 #lmp1 hr{
-    width: 70px !important;
+    width: 120px !important;
     background-color: black;
     height: 1px;
     margin: 0;
@@ -98,8 +99,9 @@
 form{
     position: relative;
 }
-form input{
+form input[type='text'] ,form input[type='password']{
     padding: 0.7em;
+    width: 20em;
     border-radius: 20px;
     z-index: 20 !important;
     background-color: transparent !important;
@@ -119,7 +121,7 @@ form div{
 }
 #m{
     position: absolute;
-    top: 90%;
+    top: 100%;
     left: 20%;
 }
 #m1{
@@ -133,10 +135,11 @@ form div{
     border: 1px solid;
     border-radius: 10px;
     padding: 0.5em 1.7em;
+    font-size: 16px;
 }
 #m button:hover{
     color: white;
-    background-color: black;
+    background-color: rgb(5, 95, 5);
     transition: all 0.4s;
 }
 
@@ -151,14 +154,23 @@ form div{
     border: 1px solid;
     border-radius: 10px;
     padding: 0.5em 1.7em;
+    font-size: 16px;
 }
 #LM{
     position: absolute !important;
-    top: 53% !important;
+    top: 55% !important;
+}
+#LM3{
+    position: absolute !important;
+    top: 65% !important;
+}
+#LM2{
+    position: absolute !important;
+    top: 43% !important;
 }
 #LM1{
     position: absolute !important;
-    top: 80% !important;
+    top: 85% !important;
 }
 form div label {
     position: absolute;
@@ -278,8 +290,6 @@ aside ul{
     display: flex;
     justify-content: center;
     align-items: center;
-
-    display: none;
     animation: ld 0.6s linear;
 }
 @keyframes mop {

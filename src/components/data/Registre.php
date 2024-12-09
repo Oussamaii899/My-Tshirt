@@ -68,14 +68,14 @@ try {
     $mail->Body .= '<p>Votre code de vérification est : <b style="font-size: 20px;">' . $verification_code . '</b></p>';
     $mail->send();
 
-    $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
+    $encrypted_password = $password;
     $sql = "INSERT INTO USERS (id, username, email, password, verificationCode, emailVerifiedAt) 
             VALUES (NULL, ?, ?, ?, ?, NULL)";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("ssss", $username, $email, $encrypted_password, $verification_code);
     $stmt->execute();
 
-    echo json_encode(["success" => "Utilisateur enregistré avec succès. Vérifiez votre email pour le code de vérification."]);
+    echo json_encode(['status' => 'success','message' => 'Utilisateur enregistré avec succès. Vérifiez votre email.']);
 } catch (Exception $e) {
     echo json_encode(["error" => "Erreur lors de l'envoi de l'email : " . $mail->ErrorInfo]);
 }

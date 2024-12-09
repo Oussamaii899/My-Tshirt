@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState,useRef } from "react";
+import React, { useState,useRef, useEffect } from "react";
 import Notif from "./Notification";
+import axios from "axios";
 
 export default function Login(){
 
-    let usn = 'Username';
+    let usn = 'email';
     let pws = 'Password';
 
     const ref = useRef(null);
@@ -13,13 +14,20 @@ export default function Login(){
     const[f,SetF] = useState(false);
     const[ff,SetFF] = useState(false);
 
-    const[notifi,SetNotif] = useState('lol');
-    const[coli,SetCol] = useState('red');
-    let usPI =  'Username or password is empty';
+    const[notifi,SetNotif] = useState('');
+    const[coli,SetCol] = useState('');
+    const[ds,SetDs] = useState('none');
+    const[fa,SetFa] = useState('fa fa-exclamation');
 
-    un !== '' && !f ? usn = "" : usn = "Username";
+    const[users,SetUsers] = useState([]);
+    /* let col ; */
+
+    let usPI =  'email or password is empty';
+
+    un !== '' && !f ? usn = "" : usn = "email";
     pw !== '' && !ff ? pws = "" : pws = "Password";
-   
+    
+
     function logA(){
         let login = document.getElementById('login');
         login.style.animation='il 1s linear'
@@ -34,7 +42,16 @@ export default function Login(){
             regitser.style.display='flex';
         }, 1200);
     }
-
+    /* 
+        $2a$10$V33V9fXq10ea2JWlhtecW.IJE7NOqunU1WhOKMnSfST5QvqOVg8C2
+        $2y$10$3cmpIsX3KpW7AH47OSkz2.XrkDO/oog3hOl.Ff3XLWBZhKQICPnNW
+    */
+    useEffect(
+        ()=>{
+            axios.get('http://localhost:8000/users.php')
+            .then(data => SetUsers(data.data))
+        }
+    )
     function login(e){
         if(un === '' || pw === '' ){
             e.preventDefault()
@@ -54,14 +71,43 @@ export default function Login(){
             }, 7998);
         }
         else{
-            alert("done")
+            e.preventDefault()
+            
+            if(users.find( (u)=> u.email === un ) ) // un = email (usestate)
+                {
+                    console.log(pw);
+                    if(users.find( (u)=> u.password === pw )){
+                        alert('login successfuly');
+                        async function session(e){
+                            e.preventDefault();
+                            try {
+                                const response = await axios.post('http://localhost:8000/register.php', {
+                                  email:un,
+                                  password:pw
+                            });
+                                const data = await response.data; 
+                        }
+                            
+                            catch(error){
+                                console.error(error);
+                            }
+                        }
+                    }
+                    else{
+                        alert('password incorrect')
+                    }
+                   alert(un)
+            }
+            else{
+                alert("email n'existe pas ou invalid")
+            }
         }
     }
     return(
 
         <div className="rf">
             <div id="login"  className="log">
-                <Notif notif={notifi} col={coli}></Notif>
+                <Notif notif={notifi} col={coli} ds={ds} fa={fa}></Notif>
             <h2 id="ml">Login</h2>
             <form>
                 <div><label id="us">{usn}</label> <br></br> <input type="text" onFocus={() => SetF(true)} onBlur={() => SetF(false)}  ref={ref} onChange={(event)=>{SetUn(event.target.value)}}></input></div> <br></br> 

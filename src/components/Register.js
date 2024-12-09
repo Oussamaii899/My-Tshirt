@@ -20,9 +20,11 @@ export default function Register(){
     const[ff,SetFf] = useState(false);
     const[fff,SetFff] = useState(false);
 
-    const[notifi,SetNotif] = useState();
-    const[coli,SetCol] = useState();
-    
+    const[notifi,SetNotif] = useState('');
+    const[coli,SetCol] = useState('');
+    const[ds,SetDs] = useState('none');
+    const[anim,SetAnim] = useState('');
+    const[fa,SetFa] = useState('fa fa-exclamation');
 
 
 
@@ -63,32 +65,28 @@ export default function Register(){
             if (data.status === 'error') {
                 SetNotif(data.message);
                 SetCol('yellow');
-                document.getElementById('nf').style.display='flex';
-                setTimeout(() => {
-                 document.getElementById('nf').style.animation='mop 1s linear';
-                 
-                }, 7000);
-                 setTimeout(() => {
-                     document.getElementById('nf').style.display='none';
-                     SetNotif('');
-                     SetCol();
-                 }, 7998);
+                
+            }
+            if (data.status === 'success') {
+                SetNotif(data.message);
+                SetCol('lightgreen');
+                SetFa('fa fa-check');
             }
 
             // Success - show success message
             SetNotif(data.message);
-            SetCol('lightgreen');
-
-            document.getElementById('nf').style.display='flex';
+            SetDs('flex')
             setTimeout(() => {
-             document.getElementById('nf').style.animation='mop 1s linear';
+             SetAnim('mop 1s linear')
              
             }, 7000);
              setTimeout(() => {
-                 document.getElementById('nf').style.display='none';
+                 SetDs('none')
                  SetNotif('');
                  SetCol();
              }, 7998);
+
+            
 
             
                   
@@ -107,7 +105,7 @@ export default function Register(){
     return(
         <div className="rf">
         <div className="log RegisterA" id="RegisterA">
-            <Notif notif={notifi} col={coli}></Notif>
+            <Notif notif={notifi} col={coli} ds={ds} anim={anim} fa={fa}></Notif>
             <h2 id="ml1">Register</h2>
             <form>
                 <div><label id="us">{usn}</label> <br></br> <input type="text" onFocus={() => SetF(true)} onBlur={() => SetF(false)}  ref={ref} onChange={(event)=>{SetUn(event.target.value)}}></input></div> <br></br> 
