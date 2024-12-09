@@ -10,6 +10,9 @@
     padding: 0;
     list-style: none;
 }
+html{
+    overflow-x: hidden;
+}
 nav{
     display: flex;
     justify-content: space-between;
@@ -40,30 +43,78 @@ nav ul li .lien{
 nav ul li .lien:hover{
     color: #4567b7;
 }
+#searchli{
+    position: relative;
+}
 nav ul li button{
     margin-right: 100px;
-    width: 130px;
-    height: 40px;
-    margin-left: 5px;
+    width: 50px;
+    height: 100%;
     font-weight: 700;
-    color: blue;
-    background-color: white;
+    color: white;
+    background-color: #1a1d23 !important;
     text-transform: uppercase;
+    z-index: 2;
     cursor: pointer;
     border: transparent;
-    border-radius: 5px;
     transition: .5s;
+    position: absolute;
+    right: -15.1%;
+}
+#search-bar{
+    position: relative;
+    right: -100% !important;
+    opacity: 0;
+    transition: right 1s;
+    z-index: -1;
+}
+#search-bar:hover{
+    opacity: 1;
+    transition: right 0s;
+    left: 0;
+    z-index: 1 !important;
+}
+#search-bar:focus{
+    opacity: 1;
+    transition: right 0s;
+    left: 0;
+    z-index: 1 !important;
+}
+nav ul li:has(#search-bar:hover) button{
+    background-color: #1a1d23 !important;
+    color: lightblue;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+nav ul li:has(#search-bar:focus) button{
+    background-color: #1a1d23 !important;
+    color: lightblue;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 nav ul li button:hover{
-    background-color: blue;
-    color: #ffffe0;
+    background-color: #1a1d23 !important;
+    color: lightblue;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
+nav ul li:has(button:hover) #search-bar{
+    opacity: 1;
+    z-index: 1 !important;
+    left: 0;
+}  
 nav ul li input{
     width: 600px;
     padding: 20px;
     padding-left: 40px;
     height: 5px;
-    background: url('/public/img/bootstrap-icons-1.11.3/search.svg') no-repeat 10px center white;
+    background: no-repeat 10px center white;
     outline: none;
     border: transparent;
     border-radius: 10px;
