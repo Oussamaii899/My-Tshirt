@@ -1,8 +1,9 @@
-
+import React from "react";
+import Nav from "./components/Navbar"
 function App() {
   return (
     <div>
-      <h1>test</h1>
+      <Nav/>
     </div>
   );
 }
