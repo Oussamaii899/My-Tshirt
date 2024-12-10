@@ -2,6 +2,9 @@
 import React, { useState,useRef, useEffect } from "react";
 import Notif from "./Notification";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Login(){
 
@@ -18,6 +21,10 @@ export default function Login(){
     const[coli,SetCol] = useState('');
     const[ds,SetDs] = useState('none');
     const[fa,SetFa] = useState('fa fa-exclamation');
+
+    const navigate = useNavigate()
+/* 
+    const[logSuccess,SetLogSuccess] = useState('/Authentification'); */
 
     const[users,SetUsers] = useState([]);
     /* let col ; */
@@ -75,28 +82,32 @@ export default function Login(){
             
             if(users.find( (u)=> u.email === un ) ) // un = email (usestate)
                 {
-                    console.log(pw);
-                    if(users.find( (u)=> u.password === pw )){
-                        alert('login successfuly');
-                        async function session(e){
-                            e.preventDefault();
+                    
+                    if(users.find( (u)=> u.password === pw && u.email === un)){
+                        
+                        async function session(un,pw){
+                            console.log(un,pw);
                             try {
                                 const response = await axios.post('http://localhost:8000/register.php', {
                                   email:un,
                                   password:pw
                             });
                                 const data = await response.data; 
+                                console.log(data)
                         }
                             
                             catch(error){
                                 console.error(error);
                             }
                         }
+                        session(un,pw)
+                        navigate('/profil/Account');
+                        
                     }
                     else{
                         alert('password incorrect')
                     }
-                   alert(un)
+    
             }
             else{
                 alert("email n'existe pas ou invalid")
@@ -114,7 +125,7 @@ export default function Login(){
                 <div id="LM"><label id="ps">{pws}</label> <br></br> <input type="password" onFocus={() => SetFF(true)} onBlur={() => SetFF(false)}  ref={ref}  onChange={(event)=>{SetPw(event.target.value)}}></input> </div> <br></br> 
                 <div id="m">
                     <input type="checkbox"></input> <label id="rm">Remember me </label> <br></br>
-                    <button onClick={login}>login</button>
+                    <button onClick={login}>Login</button>{/* </Link> */}
                 </div>
             </form><br></br>
             <div id="lmp">

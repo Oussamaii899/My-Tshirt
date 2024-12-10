@@ -129,7 +129,7 @@ form div{
     top: 115%;
     left: 20%;
 }
-#m  button{
+#m  button, #m a{
     margin-top: 1em;
     transition: all 0.4s;
     border: 1px solid;
@@ -137,18 +137,18 @@ form div{
     padding: 0.5em 1.7em;
     font-size: 16px;
 }
-#m button:hover{
+#m button:hover ,#m a:hover{
     color: white;
     background-color: rgb(5, 95, 5);
     transition: all 0.4s;
 }
 
-#m1 button:hover{
+#m1 button:hover ,#m1 a:hover{
     color: white;
     background-color: black;
     transition: all 0.4s;
 }
-#m1  button{
+#m1  button, #m1 a{
     margin-top: 1em;
     transition: all 0.4s;
     border: 1px solid;

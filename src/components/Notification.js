@@ -1,20 +1,18 @@
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 
-import Login from "./components/Login";
-import Nav from "./components/Navbar"
-import Register from "./components/Register";
-import Auth from "./components/Authentification";
-import {Routes, Route } from "react-router-dom";
 
-function App() {
-  return (
-    <div>
-      <Nav/>
-      <Routes>
-        <Route path="/Authtification" element={<Auth/>}/>
-      </Routes>
-      
-    </div>
-  );
+export default function Notif(props){
+
+    return(
+        <div className="notif" id="nf" style={{backgroundColor:props.col,display:props.ds,animation:props.anim}}>
+            <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+                <i className={props.fa} style={{width:'1.6em'}}/> 
+            </div>
+            <p style={{marginLeft:'1px',fontSize:'25px'}}>|</p>
+            <div>
+                <p>{props.notif}</p>
+            </div>
+        </div>
+    )
 }
-
-export default App;

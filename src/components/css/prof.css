@@ -1,0 +1,148 @@
+.bodyP{
+    background-color: #f1f5f9;
+}
+.containerP{
+    display: flex;
+    margin: 50px 10px;
+}
+.profile{
+    flex: 1;
+    margin-right: 10px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 8px 1px 4px;
+    height:82vh;
+    
+}
+.header{
+    display: flex;
+    margin-left: 15px;
+}
+.img{
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    margin: 10px;
+}
+.text{
+    font-family: 'poppins';
+    line-height: 0.5;
+}
+.title{
+    margin-top: 35px;
+    font-family: 'poppins';
+    font-size: 20px;
+}
+.email{
+    margin-top: 20px;
+    font-family: 'poppins';
+    font-size: 14px
+}
+.menu{
+    font-family: 'poppins';
+    margin: 0 20px;
+}
+.link{
+    display: block;
+    text-decoration: none;
+    color: #768499;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+.menu-icon{
+    margin-right: 10px;
+}
+
+.link:hover{
+    background: #f1f5f9;
+    color: #1e293b;
+}
+.link:first-child:hover{
+    background: cyan;
+    color: white;
+}
+.account{
+    flex: 2;
+    margin-left: 10px;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 5px;
+    height: max-content;
+}
+.aheader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #768499;
+}
+.atitle{
+    font-family: 'poppins';
+    font-size: 20px;
+    color: #1e293b;
+    font-weight: 500;
+    margin-left: 10px;
+}
+.btnP{
+    margin-right: 5px;
+}
+.cancel{
+    width: 8em;
+    height: 3em;
+    cursor: pointer;
+    border: 1px solid #768499;
+    border-radius: 2em;
+    color: #1e293b;
+    font-weight: bold;
+    margin-right: 5px;
+    background-color: white;
+    transition-duration: .3s;
+    box-shadow: rgba(0, 0, 0, 0.1);
+}
+.cancel:hover{
+    background-color: #f1f5f9;
+}
+.save{
+    width: 8em;
+    height: 3em;
+    cursor: pointer;
+    border: 1px solid #458ff6;
+    border-radius: 2em;
+    color: white;
+    font-weight: bold;
+    margin-left: 5px;
+    background-color: #536dfe;
+    transition-duration: .3s;
+    box-shadow: rgba(0, 0, 0, 0.1);
+}
+.save:hover{
+    background-color: #4053c9;
+}
+.edit{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 15px 0;
+}
+.input{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+.input .div{
+    font-family: 'poppins';
+    color: #768499;
+    font-size: 14px;
+}
+.input .inp1{
+    height: 25px;
+    border: 1.5px solid #768499;
+    border-radius: 5px;
+    padding: 5px;
+    color: #768499;
+    max-width: 100% !important;
+    width: 80%;
+    min-width: 40% !important;
+}
+  
+
