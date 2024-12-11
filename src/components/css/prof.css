@@ -57,10 +57,7 @@
     background: #f1f5f9;
     color: #1e293b;
 }
-.link:first-child:hover{
-    background: cyan;
-    color: white;
-}
+
 .account{
     flex: 2;
     margin-left: 10px;

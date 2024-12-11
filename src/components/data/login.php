@@ -1,30 +1,45 @@
 <?php 
 
+header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Credentials: true");
 
 $con = new mysqli('127.0.0.1', 'root', '', 'myshrty');
 if ($con->connect_error) {
-    die(json_encode(["error" => "Échec de la connexion à la base de données : " . $con->connect_error]));
+    die(json_encode(["error" => "Database connection failed: " . $con->connect_error]));
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data || !isset($data['email'], $data['password'])) {
-    die(json_encode(["error" => "Données invalides."]));
+    echo json_encode(["error" => "Invalid input data."]);
+    exit;
 }
 
-$email = $data["email"];
+$email = $con->real_escape_string($data["email"]);
 $password = $data["password"];
 
-$query = "SELECT * from USERS where email='$email' and password='$pasword'";
-$result= mysqli_query($con,$query) or die('erreur de requete');
-$user= mysqli_fetch_assoc($result);
+$stmt = $con->prepare("SELECT * FROM USERS WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
 
-session_start();
-    $_SESSION['id'] = $user['id'];
-    $_SESSION['username'] = $user['username'];
-    $_SESSION['email'] = $user['email'];
-    $_SESSION['password'] = $user['password'];
-    $_SESSION['photo'] = $user['photo'];
-    $_SESSION['emailVerifiedAt'] = $user['emailVerifiedAt'];
+if (!$user) {
+    echo json_encode(["error" => "Invalid email or password1."]);
+    exit;
+}
 
+$ps = $user['password'];
+
+if ($password !== $ps) {
+    echo json_encode(["error" => "Invalid email or password2. $password , $ps"]);
+    exit;
+}
+
+
+
+echo json_encode(["success" => "Login successful","id"=>$user['id'],"username"=>$user['username'],"photo"=>$user['photo']]);
 
 ?>

@@ -2,7 +2,7 @@
 import React, { useState,useRef, useEffect } from "react";
 import Notif from "./Notification";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
@@ -23,12 +23,11 @@ export default function Login(){
     const[fa,SetFa] = useState('fa fa-exclamation');
 
     const navigate = useNavigate()
-/* 
-    const[logSuccess,SetLogSuccess] = useState('/Authentification'); */
+
+    const[inf,SetInf] = useState();
+
 
     const[users,SetUsers] = useState([]);
-    /* let col ; */
-
     let usPI =  'email or password is empty';
 
     un !== '' && !f ? usn = "" : usn = "email";
@@ -49,10 +48,7 @@ export default function Login(){
             regitser.style.display='flex';
         }, 1200);
     }
-    /* 
-        $2a$10$V33V9fXq10ea2JWlhtecW.IJE7NOqunU1WhOKMnSfST5QvqOVg8C2
-        $2y$10$3cmpIsX3KpW7AH47OSkz2.XrkDO/oog3hOl.Ff3XLWBZhKQICPnNW
-    */
+
     useEffect(
         ()=>{
             axios.get('http://localhost:8000/users.php')
@@ -62,7 +58,7 @@ export default function Login(){
     function login(e){
         if(un === '' || pw === '' ){
             e.preventDefault()
-           /* alert('t'); */
+
            SetNotif(usPI);
            SetCol('yellow');
 
@@ -80,37 +76,58 @@ export default function Login(){
         else{
             e.preventDefault()
             
-            if(users.find( (u)=> u.email === un ) ) // un = email (usestate)
+            if(users.find( (u)=> u.email === un ) ) 
                 {
                     
                     if(users.find( (u)=> u.password === pw && u.email === un)){
                         
                         async function session(un,pw){
-                            console.log(un,pw);
                             try {
-                                const response = await axios.post('http://localhost:8000/register.php', {
+                                const response = await axios.post('http://localhost:8000/login.php', {
                                   email:un,
                                   password:pw
                             });
                                 const data = await response.data; 
-                                console.log(data)
+                                
+
+                                if(data.success === "Login successful"){
+                                    localStorage.setItem("user", JSON.stringify({
+                                        email: un,
+                                        id: data.id,
+                                        username:data.username,
+                                        photo:data.photo
+                                    }));
+                                }
                         }
                             
                             catch(error){
-                                console.error(error);
                             }
                         }
                         session(un,pw)
-                        navigate('/profil/Account');
+                       
+                       
+
+
                         
+                        setTimeout(()=>{
+                            
+                            navigate('/profil/Account');
+                            window.location.reload()
+                        },2000)                        
                     }
                     else{
-                        alert('password incorrect')
+             
+                        SetNotif('password incorrect');
+                        SetCol('red');
+                        SetFa('fa fa-exclamation');
                     }
     
             }
             else{
-                alert("email n'existe pas ou invalid")
+                
+                SetNotif("email n'existe pas ou invalid");
+                SetCol('red');
+                SetFa('fa fa-exclamation');
             }
         }
     }
@@ -125,7 +142,9 @@ export default function Login(){
                 <div id="LM"><label id="ps">{pws}</label> <br></br> <input type="password" onFocus={() => SetFF(true)} onBlur={() => SetFF(false)}  ref={ref}  onChange={(event)=>{SetPw(event.target.value)}}></input> </div> <br></br> 
                 <div id="m">
                     <input type="checkbox"></input> <label id="rm">Remember me </label> <br></br>
-                    <button onClick={login}>Login</button>{/* </Link> */}
+                    <button onClick={login}>Login</button><br></br> <br></br>
+
+                    <a style={{marginTop:'1em'}} onClick={()=>{navigate("/ForgetPassword")}}>Forget Your password ? </a>
                 </div>
             </form><br></br>
             <div id="lmp">

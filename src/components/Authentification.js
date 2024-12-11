@@ -5,7 +5,7 @@ import './css/Register.css'
 export default function Auth(){
     return(
 
-        <div>
+        <div id="rff">
             <Login></Login>
             <Register></Register>
         </div>

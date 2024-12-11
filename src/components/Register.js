@@ -60,7 +60,7 @@ export default function Register(){
             });
       
             const data = await response.data; 
-            console.log(data);
+
             
             if (data.status === 'error') {
                 SetNotif(data.message);
@@ -73,7 +73,7 @@ export default function Register(){
                 SetFa('fa fa-check');
             }
 
-            // Success - show success message
+
             SetNotif(data.message);
             SetDs('flex')
             setTimeout(() => {
@@ -92,7 +92,7 @@ export default function Register(){
                   
             
           } catch (error) {
-            console.error('Error:', error);
+
             
           }
           

@@ -12,13 +12,12 @@ include "vendor/phpmailer/src/Exception.php";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Connexion à la base de données
+
 $con = new mysqli('127.0.0.1', 'root', '', 'myshrty');
 if ($con->connect_error) {
     die(json_encode(["error" => "Échec de la connexion à la base de données : " . $con->connect_error]));
 }
 
-// Récupération des données JSON
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data || !isset($data['username'], $data['email'], $data['password'])) {
     die(json_encode(["error" => "Données invalides."]));
